@@ -1,0 +1,57 @@
+#app-root-2022-10-miljoona_roskapussia *,
+::before,
+::after {
+  box-sizing: content-box;
+}
+.ydd-article {
+  overflow: visible !important;
+}
+#app-root-2022-10-miljoona_roskapussia .app {
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#app-root-2022-10-miljoona_roskapussia .app .container {
+  text-align: center;
+}
+#app-root-2022-10-miljoona_roskapussia .app .container svg {
+  margin: auto auto;
+}
+#app-root-2022-10-miljoona_roskapussia .app .tooltip {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  font-size: 12pt;
+  opacity: 0;
+  padding: 4px 7px;
+  position: fixed;
+  z-index: 3;
+}
+/* General styles */
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  clear: both;
+  content: ' ';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.ss-terms {
+  margin: 40px auto auto auto;
+  max-width: 450px;
+}
+.meta {
+  color: #333;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 0 10px 40px 10px;
+}
+.clear_both {
+  clear: both;
+}
+.hidden {
+  display: none;
+}
+.nowrap {
+  white-space: nowrap;
+}
+
