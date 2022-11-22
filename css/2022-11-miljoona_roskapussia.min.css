@@ -1,0 +1,103 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Serif:400.css);
+#app-root-2022-11-miljoona_roskapussia *,
+::before,
+::after {
+  box-sizing: content-box;
+}
+.ydd-article {
+  overflow: visible !important;
+}
+#app-root-2022-11-miljoona_roskapussia .app {
+  font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container {
+  margin: 20px auto;
+  max-width: 400px;
+  padding: 20px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper {
+  position: relative;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .map_container {
+  text-align: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .map_container svg {
+  margin: auto auto;
+  overflow: visible;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .map_container svg circle {
+  cursor: pointer;
+  transition-property: opacity;
+  transition-delay: 2s;
+  transition: 0.3s;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .tooltip {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  font-size: 12pt;
+  opacity: 0;
+  padding: 4px 7px;
+  position: absolute;
+  z-index: 3;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container h3 {
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0 0 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .input_container {
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper {
+  margin: 5px 0;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper .label {
+  margin-right: 5px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper input {
+  text-align: center;
+  padding: 3px 7px;
+  width: 200px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper input[type="button"] {
+  background-color: #2ca02c;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 7px;
+}
+/* General styles */
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  clear: both;
+  content: ' ';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.ss-terms {
+  margin: 40px auto auto auto;
+  max-width: 450px;
+}
+.meta {
+  color: #333;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 0 10px 40px 10px;
+}
+.clear_both {
+  clear: both;
+}
+.hidden {
+  display: none;
+}
+.nowrap {
+  white-space: nowrap;
+}
+
