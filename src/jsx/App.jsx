@@ -12,7 +12,7 @@ import CSVtoJSON from './helpers/CSVtoJSON.js';
 // import formatNr from './helpers/FormatNr.js';
 // import roundNr from './helpers/RoundNr.js';
 
-// const appID = '#app-root-2022-10-miljoona_roskapussia';
+// const appID = '#app-root-2022-11-miljoona_roskapussia';
 
 function App() {
   const chartRef = useRef(null);
@@ -145,7 +145,7 @@ function App() {
   useEffect(() => {
     const getDataPath = () => {
       if (window.location.href.includes('github')) return './assets/data/data.csv';
-      if (process.env.NODE_ENV === 'production') return 'https://lusi-dataviz.ylestatic.fi/2022-10-miljoona_roskapussia/assets/data/data.csv';
+      if (process.env.NODE_ENV === 'production') return 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/assets/data/data.csv';
       return 'assets/data/data.csv';
     };
 

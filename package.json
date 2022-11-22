@@ -1,5 +1,5 @@
 {
-  "name": "2022-10-miljoona_roskapussia",
+  "name": "2022-11-miljoona_roskapussia",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,7 +14,7 @@
     "push": "git push && git push yle main",
     "start": "webpack serve --open --config webpack.dev.js",
     "sync-gh-pages": "git subtree push --prefix public origin gh-pages",
-    "sync-prod": "npm run build && dataviz-deploy generate --dir public && dataviz-deploy sync lusi 2022-10-miljoona_roskapussia --folder public",
+    "sync-prod": "npm run build && dataviz-deploy generate --dir public && dataviz-deploy sync lusi 2022-11-miljoona_roskapussia --folder public",
     "sync-share-config": "cd data && yle asu lusi-aws-yle \"aws s3 sync . s3://lusi-dataviz-prod/share_configs --exclude='*' --include='sahkokatkot.json'\""
   },
   "keywords": [],

@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import App from './jsx/App.jsx';
 
-const appName = '2022-10-miljoona_roskapussia';
+const appName = '2022-11-miljoona_roskapussia';
 const getContainer = () => document.getElementById(`app-root-${appName}`);
 
 const startApp = () => {
