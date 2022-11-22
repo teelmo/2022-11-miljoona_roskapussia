@@ -1,4 +1,4 @@
-//@import url('https://fonts.googleapis.com/css?family=Roboto+Serif:600.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Serif:400.css');
 
 #app-root-2022-10-miljoona_roskapussia *, ::before, ::after {
   box-sizing: content-box;
@@ -7,23 +7,68 @@
 @import 'yddrasil_overrides.less';
 
 #app-root-2022-10-miljoona_roskapussia .app {
-  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
   .container {
-    text-align: center;
-    svg {
-      margin: auto auto;
+    margin: 20px auto;
+    max-width: 400px;
+    padding: 20px 0;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    .map_wrapper {
+      position: relative;
+      .map_container {
+        text-align: center;
+        svg {
+          margin: auto auto;
+          overflow: visible;
+          circle {
+            cursor: pointer;
+            transition-property: opacity;
+            transition-delay: 2s;
+            transition: 0.3s;
+          }
+        }
+      }
+      .tooltip {
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ccc;
+        font-size: 12pt;
+        opacity: 0;
+        padding: 4px 7px;
+        position: absolute;
+        z-index: 3;
+      }
+    }
+    h3 {
+      font-size: 24px;
+      line-height: 28px;
+      margin: 0 0 10px 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .input_container {
+      text-align: center;
+      margin: 0 0 20px 0;
+      .input_wrapper {
+        margin: 5px 0;
+        .label {
+          margin-right: 5px;
+        }
+        input {
+          text-align: center;
+          padding: 3px 7px;
+          width: 200px;
+          &[type="button"] {
+            background-color: rgb(44, 160, 44);
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            padding: 5px 7px;
+          }
+        }
+      }
     }
   }
-  .tooltip {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #ccc;
-    font-size: 12pt;
-    opacity: 0;
-    padding: 4px 7px;
-    position: fixed;
-    z-index: 3;
-  }
-  
+
 }
 
 @import 'basics.less';
