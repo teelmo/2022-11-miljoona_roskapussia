@@ -166,12 +166,11 @@
           }
           .path {
             cursor: pointer;
-            fill: @green;
             opacity: 1;
             stroke-width: 0.5;
             stroke: #ccc;
             &:hover {
-              fill: #fff;
+              fill: @green;
             }
           }
         }
@@ -193,19 +192,25 @@
           background-color: rgba(251, 219, 233, 0.9);
           display: flex;
           flex-direction: column;
-          height: 99%;
+          height: 100%;
           justify-content: center;
+          .current_municipality_status {
+            h4 {
+              color: @green;
+              font-size: 20px;
+              line-height: 24px;
+            }
+          }
           .close_container {
             .close {
               background-color: @green;
-              border: none;
+              border: 2px solid @green;
               color: #fff;
               cursor: pointer;
               font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
               font-size: 12px;
               padding: 4px 13px;
               text-transform: uppercase;
-              border: 2px solid @green;
               &:hover {
                 background-color: @pink;
                 color: @green;
@@ -225,40 +230,6 @@
       }
     }
   }
-
-
-  // .container {
-  //   .map_wrapper {
-  //     position: relative;
-  //     .map_container {
-  //       opacity: 0;
-  //       text-align: center;
-  //       transition-delay: 0s;
-  //       transition-duration: 2s;
-  //       transition-property: opacity;
-  //       svg {
-  //         margin: auto auto;
-  //         overflow: visible;
-  //         circle {
-  //           cursor: pointer;
-  //           transition-property: opacity;
-  //           transition-delay: 2s;
-  //           transition: 0.3s;
-  //         }
-  //       }
-  //     }
-  //     .tooltip {
-  //       background-color: rgba(255, 255, 255, 0.9);
-  //       border: 1px solid #ccc;
-  //       font-size: 12pt;
-  //       opacity: 0;
-  //       padding: 4px 7px;
-  //       position: absolute;
-  //       z-index: 3;
-  //     }
-  //   }
-  // }
-
 }
 
 @import 'basics.less';

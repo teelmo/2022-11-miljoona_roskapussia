@@ -49,6 +49,7 @@
     "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
+    "chroma-js": "^2.4.2",
     "d3": "^7.6.1",
     "d3-geo-projection": "^4.0.0",
     "intersection-observer": "^0.12.2",

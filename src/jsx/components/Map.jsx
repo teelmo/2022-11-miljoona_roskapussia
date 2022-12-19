@@ -1,6 +1,7 @@
 import React, {
-  useEffect, useCallback, useState, useRef, memo
+  useEffect, useCallback, useState, useRef, useMemo, memo
 } from 'react';
+import PropTypes from 'prop-types';
 
 // https://www.npmjs.com/package/react-is-visible
 import 'intersection-observer';
@@ -15,14 +16,22 @@ import { geoLarrivee } from 'd3-geo-projection';
 // https://www.npmjs.com/package/topojson
 import * as topojson from 'topojson-client';
 
-// Load helpers.
-import { getData } from '../helpers/GetMapData.js';
+// https://vis4.net/chromajs/
+import chroma from 'chroma-js';
 
-function Map() {
+// Load helpers.
+import { getMapData } from '../helpers/GetMapData.js';
+
+function Map({ data }) {
+  const values = useMemo(() => data.reduce((acc, cur) => Object.assign(acc, { [cur[0]]: cur[1] }), {}), [data]);
+
+  const f = useMemo(() => chroma.scale(['#fff', '#00764c']).domain([0, Math.max(...data.map(el => el[1]))]), [data]);
+
   const appRef = useRef();
   const mapRef = useRef();
 
   const [currentArea, setCurrentArea] = useState('');
+  const [mapData, setMapdata] = useState(false);
 
   // Show area info
   const showData = useCallback((event, d) => {
@@ -52,7 +61,11 @@ function Map() {
       .style('display', 'none');
   };
 
-  const drawMap = useCallback((data) => {
+  const updateMap = useCallback(() => {
+    d3.select('.map_container').selectAll('path').attr('fill', (d) => (f(values[d.properties.Name] ? values[d.properties.Name] : 0)));
+  }, [f, values]);
+
+  const drawMap = useCallback((map_data) => {
     const svg = d3.select('.map_container')
       .append('svg')
       .attr('height', 650)
@@ -60,15 +73,15 @@ function Map() {
       .classed('svg-content', true)
       .attr('width', appRef.current.offsetWidth);
 
-    const map_data = topojson.feature(data, data.objects.features);
+    const map = topojson.feature(map_data, map_data.objects.features);
     // https://observablehq.com/@d3/robinson
-    const projection = geoLarrivee().fitExtent([[0, 0], [appRef.current.offsetWidth, 650]], map_data);
+    const projection = geoLarrivee().fitExtent([[0, 0], [appRef.current.offsetWidth, 650]], map);
     const path = d3.geoPath().projection(projection);
 
     svg.append('g')
-      .attr('class', 'countries')
+      .attr('class', 'areas')
       .selectAll('path')
-      .data(map_data.features)
+      .data(map.features)
       .enter()
       .append('path')
       .attr('d', path)
@@ -84,13 +97,18 @@ function Map() {
       .on('click', (event, d) => {
         showData(event, d);
       });
-  }, [showData]);
+    updateMap();
+  }, [showData, updateMap]);
 
   useEffect(() => {
-    getData().then(data => {
-      drawMap(data);
+    getMapData().then(mapdata => {
+      setMapdata(mapdata);
     });
-  }, [drawMap]);
+  }, []);
+
+  useEffect(() => {
+    if (mapData !== false && d3.select('.map_container svg').empty() === true) drawMap(mapData);
+  }, [drawMap, mapData]);
 
   return (
     <div className="map_wrapper" ref={appRef}>
@@ -102,6 +120,20 @@ function Map() {
       <div className="map_info">
         <div className="map_info_content">
           <h3>{currentArea}</h3>
+          {
+            (currentArea && values[currentArea]) && (
+              <div className="current_municipality_status">
+                <h4>
+                  <div>Kerättyjä pusseja</div>
+                  <div>
+                    {values[currentArea]}
+                    {' '}
+                    kappaletta
+                  </div>
+                </h4>
+              </div>
+            )
+          }
           <div className="close_container"><button className="close" type="button" onClick={() => hideData()}>Sulje</button></div>
         </div>
       </div>
@@ -109,5 +141,12 @@ function Map() {
     </div>
   );
 }
+
+Map.propTypes = {
+  data: PropTypes.instanceOf(Array).isRequired,
+};
+
+Map.defaultProps = {
+};
 
 export default memo(Map);

@@ -4,8 +4,8 @@ const getDataPath = () => {
   return 'assets/data/2022-11-miljoona_roskapussia_map.tjson';
 };
 
-export const getData = () => fetch(getDataPath())
+export const getMapData = () => fetch(getDataPath())
   .then((response) => response.text())
   .then((body) => JSON.parse(body));
 
-export default getData;
+export default getMapData;

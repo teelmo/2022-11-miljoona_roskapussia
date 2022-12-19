@@ -11,6 +11,7 @@ import CountUp from 'react-countup';
 import Map from './components/Map.jsx';
 
 // Load helpers.
+import { getMetaData } from './helpers/GetMetaData.js';
 import { getData } from './helpers/GetData.js';
 import easingFn from './helpers/EasingFn.js';
 
@@ -18,10 +19,16 @@ function App() {
   const [municipalities, setMunicipalities] = useState([]);
   const [error, setError] = useState(false);
   const [currentArea, setCurrentArea] = useState(false);
+  const [data, setData] = useState(false);
+  const [currentSum, setCurrentSum] = useState(0);
 
   useEffect(() => {
-    getData().then(data => {
-      setMunicipalities(data.map(el => el.name));
+    getMetaData().then(metadata => {
+      setMunicipalities(metadata.map(el => el.name));
+      getData().then(current => {
+        setCurrentSum(current.reduce((acc, cur) => acc + parseInt(cur['SUM of Määrä'], 10), 0));
+        setData(current.reduce((acc, cur) => Object.assign(acc, { [cur.Kunta]: parseInt(cur['SUM of Määrä'], 10) }), {}));
+      });
     });
   }, []);
 
@@ -40,6 +47,7 @@ function App() {
     } else {
       setError(false);
       setCurrentArea(values.municipality);
+      document.querySelector('#app_form').submit();
     }
   };
 
@@ -59,13 +67,17 @@ function App() {
             {(isVisible) => (
               <div className="total_container">
                 <div className="total_value_container">
-                  {isVisible ? (<CountUp easingFn={easingFn} start={0} delay={0.7} end={55} decimals={0} duration={4} separator="," useEasing prefix="" suffix="" />) : 0}
+                  {
+                    (currentSum > 0 && isVisible) ? (<CountUp easingFn={easingFn} start={0} delay={0.7} end={currentSum} decimals={0} duration={4} separator="," useEasing prefix="" suffix="" />) : 0
+                  }
                   {' '}
                   pussia
                 </div>
                 <div className="bar_container">
                   <span className="bar_total" />
-                  <span className="bar_current" style={isVisible ? { width: '50%' } : {}} />
+                  {
+                    (currentSum > 0) && <span className="bar_current" style={isVisible ? { width: `${currentSum / 1000000}%` } : {}} />
+                  }
                   <span className="bar_target">1&nbsp;milj.</span>
                 </div>
               </div>
@@ -76,18 +88,21 @@ function App() {
       <div className="content_container">
         <h3>Ilmoita roskasi</h3>
         <div className="input_container">
-          <label htmlFor="app_enter_amount">
-            <input id="app_enter_amount" type="number" name="" min="1" max="30" placeholder="Montako pussia keräsit" />
-          </label>
-          <label htmlFor="app_enter_municipality">
-            <input list="app_municipalities" id="app_enter_municipality" name="" placeholder="Valitse kunta" />
-            <datalist id="app_municipalities">
-              {municipalities && municipalities.map(municipality => (
-                // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                <option key={municipality} value={municipality} />
-              ))}
-            </datalist>
-          </label>
+          <form id="app_form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe8_KXWyAipScRM_4RwiLNmmCA65XWh2WPOANyrtPQOoYiO-A/formResponse" target="app_form_result">
+            <label htmlFor="app_enter_amount">
+              <input id="app_enter_amount" type="number" name="entry.865756664" min="1" max="30" placeholder="Montako pussia keräsit" />
+            </label>
+            <label htmlFor="app_enter_municipality">
+              <input list="app_municipalities" id="app_enter_municipality" name="entry.1563106520" placeholder="Valitse kunta" />
+              <datalist id="app_municipalities">
+                {municipalities && municipalities.map(municipality => (
+                  // eslint-disable-next-line jsx-a11y/control-has-associated-label
+                  <option key={municipality} value={municipality} />
+                ))}
+              </datalist>
+            </label>
+            <iframe id="app_form_result" name="app_form_result" className="hidden" title="Tulos" />
+          </form>
         </div>
         <div className="button_container">
           <button type="button" value="" onClick={() => submitForm()}>Lähetä!</button>
@@ -100,16 +115,24 @@ function App() {
             currentArea && (
               <div>
                 <div className="logo">
-                  <img src={`${window.location.href.includes('yle.fi') ? 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/' : './'}assets/img/2022-11-miljoona_roskapussia_logo.gif`} alt="Logo" />
+                  {/* <img src={`${window.location.href.includes('yle.fi') ? 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/' : './'}assets/img/2022-11-miljoona_roskapussia_logo.gif`} alt="Logo" /> */}
                 </div>
                 <h3>{currentArea}</h3>
+                <h4>
+                  <div>Kerättyjä pusseja</div>
+                  <div>
+                    {((data[currentArea]) ? data[currentArea] : 0) + parseInt(document.querySelector('#app_enter_amount').value, 10)}
+                    {' '}
+                    kappaletta
+                  </div>
+                </h4>
               </div>
             )
           }
         </div>
       </div>
       <div className="content_container">
-        <Map />
+        {data && <Map data={Object.entries(data)} />}
       </div>
       <noscript>Your browser does not support JavaScript!</noscript>
     </div>
