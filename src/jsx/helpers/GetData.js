@@ -9,7 +9,7 @@ const cleanData = (data) => data.map(el => ({
 }));
 
 const getDataPath = () => {
-  if (window.location.href.includes('github')) return './assets/data/data.csv';
+  if (window.location.href.includes('github')) return './assets/data/2022-11-miljoona_roskapussia_data.csv';
   if (process.env.NODE_ENV === 'production') return 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/assets/data/data.csv';
   return 'assets/data/2022-11-miljoona_roskapussia_data.csv';
 };

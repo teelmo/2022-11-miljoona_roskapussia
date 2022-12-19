@@ -47,7 +47,7 @@ function App() {
     <div className="app">
       <div className="content_container">
         <div className="logo_container">
-          <img src={`${process.env.NODE_ENV === 'production' ? 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/' : './'}assets/img/2022-11-miljoona_roskapussia_logo.png`} alt="Logo" className="logo" />
+          <img src={`${window.location.href.includes('yle.fi') ? 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/' : './'}assets/img/2022-11-miljoona_roskapussia_logo.png`} alt="Logo" className="logo" />
           <h2 className="logo">Miljoona Roskapussia</h2>
           <h3 className="logo">Poimi roskat reitiltäsi</h3>
         </div>
@@ -100,7 +100,7 @@ function App() {
             currentArea && (
               <div>
                 <div className="logo">
-                  <img src={`${process.env.NODE_ENV === 'production' ? 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/' : './'}assets/img/2022-11-miljoona_roskapussia_logo.gif`} alt="Logo" />
+                  <img src={`${window.location.href.includes('yle.fi') ? 'https://lusi-dataviz.ylestatic.fi/2022-11-miljoona_roskapussia/' : './'}assets/img/2022-11-miljoona_roskapussia_logo.gif`} alt="Logo" />
                 </div>
                 <h3>{currentArea}</h3>
               </div>
