@@ -1,73 +1,263 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Serif:400.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Serif:400,600.css');
 
 #app-root-2022-11-miljoona_roskapussia *, ::before, ::after {
   box-sizing: content-box;
 }
 
+@green: #00764c;
+@pink: #fbdbe9;
+
 @import 'yddrasil_overrides.less';
 
 #app-root-2022-11-miljoona_roskapussia .app {
+  background-color: @pink;
+  background-image: url('./../assets/img/2022-11-miljoona_roskapussia_bg.svg');
+  background-position: 50% 0;
+  background-repeat-x: repeat;
+  background-repeat-y: no-repeat;
+  background-size: 1200px auto; 
   font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  .container {
-    margin: 20px auto;
-    max-width: 400px;
-    padding: 20px 0;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    .map_wrapper {
-      position: relative;
-      .map_container {
-        text-align: center;
-        svg {
-          margin: auto auto;
-          overflow: visible;
-          circle {
-            cursor: pointer;
-            transition-property: opacity;
-            transition-delay: 2s;
-            transition: 0.3s;
+  padding: 100px 0 40px 0;
+  .content_container {
+    border-bottom: 1px solid @green;
+    margin: auto auto 60px auto;
+    max-width: 600px;
+    padding-bottom: 40px;
+    .logo_container {
+      text-align: center;
+      img.logo {
+        height: auto;
+        margin: 0 0 20px 0;
+        max-width: 260px;
+        width: 100%;
+      }
+      h2.logo {
+        color: @green;
+        font-size: 30px;
+        font-size: 34px;
+        font-weight: 600;
+        margin: 0 0 20px 0;
+        text-transform: uppercase;
+      }
+    }
+    h3 {
+      color: @green;
+      font-size: 24px;
+      line-height: 26px;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+    h4 {
+      color: @green;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 26px;
+      margin: 0 0 10px 0;
+      text-align: center;
+      .total_container {
+        .total_value_container {
+          margin-bottom: 10px;
+        }
+        .bar_container {
+          height: 40px;
+          position: relative;
+          .bar_total {
+            background-color: #fff;
+            border-radius: 20px;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+          }
+          .bar_current {
+            background-color: @green;
+            // https://cssgradient.io/
+            background: linear-gradient(270deg, rgba(0,118,76,1) 0%, rgba(0,118,76,0.5340730042016807) 72%);
+            border-radius: 20px;
+            height: 100%;
+            left: 0;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            transition-delay: 0s;
+            transition-duration: 2s;
+            transition-property: width;
+            width: 40px;
+          }
+          .bar_target {
+            color: #222;
+            font-size: 20px;
+            line-height: 40px;
+            padding-right: 10px;
+            position: absolute;
+            right: 0;
+            text-align: right;
+            width: 100%;
           }
         }
       }
-      .tooltip {
-        background-color: rgba(255, 255, 255, 0.9);
+    }
+    .input_container {
+      margin: 20px 0 20px 0;
+      text-align: center;
+      label {
+        margin: 0 10px;
+        .label {
+          margin-right: 5px;
+        }
+        input {
+          border-radius: 10px;
+          border: none;
+          font-size: 18px;
+          padding: 8px 10px;
+          text-align: center;
+          width: 200px;
+        }
+      }
+    }
+    .button_container {
+      margin-bottom: 20px;
+      text-align: center;
+      button {
+        appearance: none;
+        background-color: @green;
+        border-radius: 20px;
+        border: 2px solid @green;
+        color: #fff;
+        cursor: pointer;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 26px;
+        outline: none;
+        padding: 8px 20px;
+        &:hover {
+          background-color: @pink;
+          color: @green;
+        }
+      }
+    }
+    .result_container {
+      text-align: center;
+      .error_msg_container {
+        color: #721c24;
+      }
+    }
+    .map_wrapper {
+      position: relative;
+      .map_container {
+        opacity: 0;
+        text-align: center;
+        transform: rotate(5.5deg);
+        transition-delay: 0s;
+        transition-duration: 2s;
+        transition-property: opacity;
+        svg {
+          margin: auto auto;
+          overflow: visible;
+          position: relative;
+          width: 100%;
+          z-index: 1;
+          circle {
+            cursor: pointer;
+            transition-delay: 2s;
+            transition-property: opacity;
+            transition: 0.3s;
+          }
+          .path {
+            cursor: pointer;
+            fill: @green;
+            opacity: 1;
+            stroke-width: 0.5;
+            stroke: #ccc;
+            &:hover {
+              fill: #fff;
+            }
+          }
+        }
+      }
+
+      .map_info {
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition-delay: 0s;
+        transition-duration: 0.3s;
+        transition-property: opacity;
+        visibility: hidden;
+        width: 100%;
+        z-index: 1;
+        .map_info_content {
+          align-items: center;
+          background-color: rgba(251, 219, 233, 0.9);
+          display: flex;
+          flex-direction: column;
+          height: 99%;
+          justify-content: center;
+          .close_container {
+            .close {
+              background-color: @green;
+              border: none;
+              color: #fff;
+              cursor: pointer;
+              font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
+              font-size: 12px;
+              padding: 4px 13px;
+              text-transform: uppercase;
+              border: 2px solid @green;
+              &:hover {
+                background-color: @pink;
+                color: @green;
+              }
+            }
+          }
+        }
+      }
+      .map_tooltip {
+        background-color: rgba(255, 255, 255, 1);
         border: 1px solid #ccc;
-        font-size: 12pt;
+        font-size: 14px;
         opacity: 0;
         padding: 4px 7px;
         position: absolute;
         z-index: 3;
       }
     }
-    h3 {
-      font-size: 24px;
-      line-height: 28px;
-      margin: 0 0 10px 0;
-      text-align: center;
-      text-transform: uppercase;
-    }
-    .input_container {
-      text-align: center;
-      margin: 0 0 20px 0;
-      .input_wrapper {
-        margin: 5px 0;
-        .label {
-          margin-right: 5px;
-        }
-        input {
-          text-align: center;
-          padding: 3px 7px;
-          width: 200px;
-          &[type="button"] {
-            background-color: rgb(44, 160, 44);
-            border: 0;
-            color: #fff;
-            cursor: pointer;
-            padding: 5px 7px;
-          }
-        }
-      }
-    }
   }
+
+
+  // .container {
+  //   .map_wrapper {
+  //     position: relative;
+  //     .map_container {
+  //       opacity: 0;
+  //       text-align: center;
+  //       transition-delay: 0s;
+  //       transition-duration: 2s;
+  //       transition-property: opacity;
+  //       svg {
+  //         margin: auto auto;
+  //         overflow: visible;
+  //         circle {
+  //           cursor: pointer;
+  //           transition-property: opacity;
+  //           transition-delay: 2s;
+  //           transition: 0.3s;
+  //         }
+  //       }
+  //     }
+  //     .tooltip {
+  //       background-color: rgba(255, 255, 255, 0.9);
+  //       border: 1px solid #ccc;
+  //       font-size: 12pt;
+  //       opacity: 0;
+  //       padding: 4px 7px;
+  //       position: absolute;
+  //       z-index: 3;
+  //     }
+  //   }
+  // }
 
 }
 

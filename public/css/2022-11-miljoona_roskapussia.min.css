@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Serif:400.css);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Serif:400,600.css);
 #app-root-2022-11-miljoona_roskapussia *,
 ::before,
 ::after {
@@ -8,67 +8,215 @@
   overflow: visible !important;
 }
 #app-root-2022-11-miljoona_roskapussia .app {
+  background-color: #fbdbe9;
+  background-image: url('../assets/img/2022-11-miljoona_roskapussia_bg.svg');
+  background-position: 50% 0;
+  background-repeat-x: repeat;
+  background-repeat-y: no-repeat;
+  background-size: 1200px auto;
   font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 100px 0 40px 0;
 }
-#app-root-2022-11-miljoona_roskapussia .app .container {
-  margin: 20px auto;
-  max-width: 400px;
-  padding: 20px 0;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+#app-root-2022-11-miljoona_roskapussia .app .content_container {
+  border-bottom: 1px solid #00764c;
+  margin: auto auto 60px auto;
+  max-width: 600px;
+  padding-bottom: 40px;
 }
-#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper {
-  position: relative;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .map_container {
+#app-root-2022-11-miljoona_roskapussia .app .content_container .logo_container {
   text-align: center;
 }
-#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .map_container svg {
+#app-root-2022-11-miljoona_roskapussia .app .content_container .logo_container img.logo {
+  height: auto;
+  margin: 0 0 20px 0;
+  max-width: 260px;
+  width: 100%;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .logo_container h2.logo {
+  color: #00764c;
+  font-size: 30px;
+  font-size: 34px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h3 {
+  color: #00764c;
+  font-size: 24px;
+  line-height: 26px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h4 {
+  color: #00764c;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .total_value_container {
+  margin-bottom: 10px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container {
+  height: 40px;
+  position: relative;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container .bar_total {
+  background-color: #fff;
+  border-radius: 20px;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container .bar_current {
+  background-color: #00764c;
+  background: linear-gradient(270deg, #00764c 0%, rgba(0, 118, 76, 0.534073) 72%);
+  border-radius: 20px;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transition-delay: 0s;
+  transition-duration: 2s;
+  transition-property: width;
+  width: 40px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container .bar_target {
+  color: #222;
+  font-size: 20px;
+  line-height: 40px;
+  padding-right: 10px;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  width: 100%;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .input_container {
+  margin: 20px 0 20px 0;
+  text-align: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label {
+  margin: 0 10px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label .label {
+  margin-right: 5px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label input {
+  border-radius: 10px;
+  border: none;
+  font-size: 18px;
+  padding: 8px 10px;
+  text-align: center;
+  width: 200px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .button_container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .button_container button {
+  appearance: none;
+  background-color: #00764c;
+  border-radius: 20px;
+  border: 2px solid #00764c;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 26px;
+  outline: none;
+  padding: 8px 20px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .button_container button:hover {
+  background-color: #fbdbe9;
+  color: #00764c;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .result_container {
+  text-align: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .result_container .error_msg_container {
+  color: #721c24;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper {
+  position: relative;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container {
+  opacity: 0;
+  text-align: center;
+  transform: rotate(5.5deg);
+  transition-delay: 0s;
+  transition-duration: 2s;
+  transition-property: opacity;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container svg {
   margin: auto auto;
   overflow: visible;
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
-#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .map_container svg circle {
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container svg circle {
   cursor: pointer;
-  transition-property: opacity;
   transition-delay: 2s;
+  transition-property: opacity;
   transition: 0.3s;
 }
-#app-root-2022-11-miljoona_roskapussia .app .container .map_wrapper .tooltip {
-  background-color: rgba(255, 255, 255, 0.9);
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container svg .path {
+  cursor: pointer;
+  fill: #00764c;
+  opacity: 1;
+  stroke-width: 0.5;
+  stroke: #ccc;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container svg .path:hover {
+  fill: #fff;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info {
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition-delay: 0s;
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content {
+  align-items: center;
+  background-color: rgba(251, 219, 233, 0.9);
+  display: flex;
+  flex-direction: column;
+  height: 99%;
+  justify-content: center;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container .close {
+  background-color: #00764c;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  padding: 4px 13px;
+  text-transform: uppercase;
+  border: 2px solid #00764c;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container .close:hover {
+  background-color: #fbdbe9;
+  color: #00764c;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_tooltip {
+  background-color: #ffffff;
   border: 1px solid #ccc;
-  font-size: 12pt;
+  font-size: 14px;
   opacity: 0;
   padding: 4px 7px;
   position: absolute;
   z-index: 3;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container h3 {
-  font-size: 24px;
-  line-height: 28px;
-  margin: 0 0 10px 0;
-  text-align: center;
-  text-transform: uppercase;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container .input_container {
-  text-align: center;
-  margin: 0 0 20px 0;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper {
-  margin: 5px 0;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper .label {
-  margin-right: 5px;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper input {
-  text-align: center;
-  padding: 3px 7px;
-  width: 200px;
-}
-#app-root-2022-11-miljoona_roskapussia .app .container .input_container .input_wrapper input[type="button"] {
-  background-color: #2ca02c;
-  border: 0;
-  color: #fff;
-  cursor: pointer;
-  padding: 5px 7px;
 }
 /* General styles */
 .clearfix {
