@@ -23,22 +23,14 @@ import chroma from 'chroma-js';
 import { getMapData } from '../helpers/GetMapData.js';
 
 function Map({ data }) {
-  const values = useMemo(() => data.reduce((acc, cur) => Object.assign(acc, { [cur[0]]: cur[1] }), {}), [data]);
-
-  const f = useMemo(() => chroma.scale(['#fff', '#00764c']).domain([0, Math.max(...data.map(el => el[1]))]), [data]);
-
   const appRef = useRef();
   const mapRef = useRef();
 
   const [currentArea, setCurrentArea] = useState('');
   const [mapData, setMapdata] = useState(false);
 
-  // Show area info
-  const showData = useCallback((event, d) => {
-    setCurrentArea(d.properties.Name);
-    appRef.current.querySelector('.map_info').style.visibility = 'visible';
-    appRef.current.querySelector('.map_info').style.opacity = 1;
-  }, []);
+  const values = useMemo(() => data.reduce((acc, cur) => Object.assign(acc, { [cur[0]]: cur[1] }), {}), [data]);
+  const f = useMemo(() => chroma.scale(['#fff', '#00764c']).domain([0, Math.max(...data.map(el => el[1]))]), [data]);
 
   // Hide area info
   const hideData = () => {
@@ -46,26 +38,30 @@ function Map({ data }) {
     appRef.current.querySelector('.map_info').style.opacity = 0;
   };
 
-  const showTooltip = (event, d) => {
-    d3.select(appRef.current).select('.map_tooltip')
-      .style('left', `${event.offsetX + 10}px`)
-      .style('top', `${event.offsetY + 10}px`)
-      .style('display', 'inline')
-      .style('opacity', 1)
-      .html(d.properties.Name);
-  };
-
-  const hideTooltip = () => {
-    d3.select(appRef.current).select('.map_tooltip')
-      .style('opacity', 0)
-      .style('display', 'none');
-  };
-
   const updateMap = useCallback(() => {
-    d3.select('.map_container').selectAll('path').attr('fill', (d) => (f(values[d.properties.Name] ? values[d.properties.Name] : 0)));
+    d3.select(appRef.current).select('.map_container').selectAll('path').attr('fill', (d) => (f(values[d.properties.Name] ? values[d.properties.Name] : 0)));
   }, [f, values]);
 
   const drawMap = useCallback((map_data) => {
+    // Show area info
+    const showData = (event, d) => {
+      setCurrentArea(d.properties.Name);
+      appRef.current.querySelector('.map_info').style.visibility = 'visible';
+      appRef.current.querySelector('.map_info').style.opacity = 1;
+    };
+    const showTooltip = (event, d) => {
+      d3.select(appRef.current).select('.map_tooltip')
+        .style('left', `${event.offsetX + 10}px`)
+        .style('top', `${event.offsetY + 10}px`)
+        .style('display', 'inline')
+        .style('opacity', 1)
+        .html(`<strong>${d.properties.Name}</strong>${(values[d.properties.Name]) ? `<br /> ${values[d.properties.Name]} pussia` : ''}`);
+    };
+    const hideTooltip = () => {
+      d3.select(appRef.current).select('.map_tooltip')
+        .style('opacity', 0)
+        .style('display', 'none');
+    };
     const svg = d3.select('.map_container')
       .append('svg')
       .attr('height', 650)
@@ -98,7 +94,7 @@ function Map({ data }) {
         showData(event, d);
       });
     updateMap();
-  }, [showData, updateMap]);
+  }, [updateMap, values]);
 
   useEffect(() => {
     getMapData().then(mapdata => {
@@ -107,14 +103,14 @@ function Map({ data }) {
   }, []);
 
   useEffect(() => {
-    if (mapData !== false && d3.select('.map_container svg').empty() === true) drawMap(mapData);
+    if (mapData !== false && d3.select(appRef.current).select('.map_container svg').empty() === true) drawMap(mapData);
   }, [drawMap, mapData]);
 
   return (
-    <div className="map_wrapper" ref={appRef}>
+    <div className="map_wrapper map_municipality" ref={appRef}>
       <IsVisible once>
         {(isVisible) => (
-          <div className="map_container" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
+          <div className="map_container map" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
         )}
       </IsVisible>
       <div className="map_info">
@@ -143,7 +139,7 @@ function Map({ data }) {
 }
 
 Map.propTypes = {
-  data: PropTypes.instanceOf(Array).isRequired,
+  data: PropTypes.instanceOf(Array).isRequired
 };
 
 Map.defaultProps = {

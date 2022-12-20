@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Serif:400,600.css');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600.css');
+@import url('https://use.typekit.net/mlj7vum.css');
 
 #app-root-2022-11-miljoona_roskapussia *, ::before, ::after {
   box-sizing: content-box;
 }
 
 @green: #00764c;
-@pink: #fbdbe9;
+@pink: #fbdae8;
 
 @import 'yddrasil_overrides.less';
 
@@ -15,9 +16,11 @@
   background-position: 50% 0;
   background-repeat-x: repeat;
   background-repeat-y: no-repeat;
-  background-size: 1200px auto; 
-  font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 100px 0 40px 0;
+  background-repeat: repeat-x;
+  background-size: 100% auto; 
+  font-family: Open Sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 40px;
+  padding: 0 0 40px 0;
   .content_container {
     border-bottom: 1px solid @green;
     margin: auto auto 60px auto;
@@ -28,27 +31,35 @@
       img.logo {
         height: auto;
         margin: 0 0 20px 0;
-        max-width: 260px;
+        max-width: 140px;
         width: 100%;
       }
-      h2.logo {
-        color: @green;
-        font-size: 30px;
-        font-size: 34px;
-        font-weight: 600;
-        margin: 0 0 20px 0;
+    }
+    h2 {
+      color: @green;
+      font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 36px;
+      letter-spacing: 0.05em;
+      margin: 0 0 10px 0;
+      text-align: center;
+      &.logo {
         text-transform: uppercase;
       }
     }
     h3 {
       color: @green;
-      font-size: 24px;
-      line-height: 26px;
+      font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 32px;
       margin: 0 0 10px 0;
       text-align: center;
     }
     h4 {
       color: @green;
+      font-family: Open Sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 24px;
       font-weight: 400;
       line-height: 26px;
@@ -56,14 +67,15 @@
       text-align: center;
       .total_container {
         .total_value_container {
-          margin-bottom: 10px;
+          margin-bottom: 20px;
         }
         .bar_container {
-          height: 40px;
+          height: 50px;
           position: relative;
+          overflow: hidden;
+          border-radius: 25px;
           .bar_total {
             background-color: #fff;
-            border-radius: 20px;
             height: 100%;
             left: 0;
             position: absolute;
@@ -74,7 +86,6 @@
             background-color: @green;
             // https://cssgradient.io/
             background: linear-gradient(270deg, rgba(0,118,76,1) 0%, rgba(0,118,76,0.5340730042016807) 72%);
-            border-radius: 20px;
             height: 100%;
             left: 0;
             overflow: hidden;
@@ -83,13 +94,12 @@
             transition-delay: 0s;
             transition-duration: 2s;
             transition-property: width;
-            width: 40px;
           }
           .bar_target {
             color: #222;
             font-size: 20px;
-            line-height: 40px;
-            padding-right: 10px;
+            line-height: 50px;
+            padding-right: 15px;
             position: absolute;
             right: 0;
             text-align: right;
@@ -97,6 +107,10 @@
           }
         }
       }
+    }
+    p {
+      font-family: Open Sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-align: center;
     }
     .input_container {
       margin: 20px 0 20px 0;
@@ -113,6 +127,15 @@
           padding: 8px 10px;
           text-align: center;
           width: 200px;
+          outline: none;
+          &::placeholder {
+            color: @green;
+            opacity: 0.5;
+            text-align: left;
+          }
+          &:focus::placeholder {
+            opacity: 1;
+          }
         }
       }
     }
@@ -126,6 +149,7 @@
         border: 2px solid @green;
         color: #fff;
         cursor: pointer;
+        font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 24px;
         font-weight: 600;
         line-height: 26px;
@@ -142,16 +166,21 @@
       .error_msg_container {
         color: #721c24;
       }
+      video {
+        width: 140px;
+      }
     }
     .map_wrapper {
       position: relative;
       .map_container {
         opacity: 0;
         text-align: center;
-        transform: rotate(5.5deg);
         transition-delay: 0s;
         transition-duration: 2s;
         transition-property: opacity;
+        &.map {
+          transform: rotate(5.5deg);
+        }
         svg {
           margin: auto auto;
           overflow: visible;
@@ -207,7 +236,7 @@
               border: 2px solid @green;
               color: #fff;
               cursor: pointer;
-              font-family: Roboto Serif, "Helvetica Neue", Helvetica, Arial, sans-serif;
+              font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
               font-size: 12px;
               padding: 4px 13px;
               text-transform: uppercase;

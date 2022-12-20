@@ -1,9 +1,11 @@
 import CSVtoJSON from './CSVtoJSON.js';
 
 const cleanData = (data) => data.map(el => ({
-  group: parseInt(el.Group, 10),
-  name: el.Name,
-  population: parseInt(el.Population, 10),
+  group: parseInt(el.group, 10),
+  id: el.id,
+  name_fi: el.name_fi,
+  name_se: el.name_se,
+  population: parseInt(el.population, 10),
   x: parseFloat(el.x),
   y: parseFloat(el.y)
 }));
