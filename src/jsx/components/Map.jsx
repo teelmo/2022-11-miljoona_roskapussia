@@ -32,11 +32,15 @@ function Map({ data, metadata }) {
 
   const values = useMemo(() => data.reduce((acc, cur) => Object.assign(acc, { [cur[0]]: cur[1] }), {}), [data]);
   const metadata_values = useMemo(() => metadata.reduce((acc, cur) => Object.assign(acc, { [cur.id]: cur }), {}), [metadata]);
-  const f = useMemo(() => chroma.scale(['#fff', '#00764c']).domain([0, Math.max(...data.map(el => el[1]))]), [data]);
-  console.log(data);
-  console.log(values);
-  console.log(metadata);
-  console.log(metadata_values);
+  const max_value = Math.max(...data.map(el => el[1]));
+  const f = useMemo(() => chroma.scale(['#fff', '#00764c']).domain([0, max_value]), [max_value]);
+
+  const scales = [];
+  let value = 0;
+  while (value < max_value) {
+    value += (max_value / 100);
+    scales.push(value);
+  }
 
   // Hide area info
   const hideData = () => {
@@ -120,9 +124,19 @@ function Map({ data, metadata }) {
 
   return (
     <div className="map_wrapper map_municipality" ref={appRef}>
+      <h2>Miltä tilanne näyttää kunnittain</h2>
+      <h4>Valitse kunta täppäämällä tai klikkaamalla kuntaa</h4>
       <IsVisible once>
         {(isVisible) => (
-          <div className="map_container map" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
+          <>
+            <div className="map_container map" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
+            <div className="legend_container">
+              <h5>Enemmän kerättyjä pusseja →</h5>
+              {
+              scales.map((scale) => <div key={scale} className="legend" style={{ backgroundColor: f(scale) }} />)
+            }
+            </div>
+          </>
         )}
       </IsVisible>
       <div className="map_info">

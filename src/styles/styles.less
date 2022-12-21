@@ -29,7 +29,7 @@
     border-bottom: 1px solid @green;
     margin: auto auto 60px auto;
     max-width: 600px;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
     .logo_container {
       text-align: center;
       img.logo {
@@ -209,7 +209,18 @@
           }
         }
       }
-
+      .legend_container {
+        height: 20px;
+        text-align: right;
+        h5 {
+          margin: 0 0 2px 0;
+        }
+        .legend {
+          display: inline-block;
+          height: 20px;
+          width: 2px
+        }
+      }
       .map_info {
         height: 100%;
         opacity: 0;
@@ -229,6 +240,7 @@
           height: 100%;
           justify-content: center;
           .current_municipality_status {
+            margin-bottom: 20px;
             h4 {
               color: @green;
               font-size: 20px;
@@ -237,9 +249,11 @@
           }
           .neighbours_container {
             h5 {
-              font-size: 16px;
+              font-size: 18px;
+              margin: 0 0 10px 0;
             } 
             margin-bottom: 20px;
+            text-align: center;
             .neighbour_container {
               .label {
                 font-weight: 600;
