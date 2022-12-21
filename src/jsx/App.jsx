@@ -165,7 +165,7 @@ function App() {
       </div>
       <div className="content_container">
         <p>Kartta päivittyy viiveellä</p>
-        {data && <Map data={Object.entries(data)} />}
+        {data && <Map data={Object.entries(data)} metadata={metaData} />}
       </div>
       <div className="content_container">
         {(data && metaData) && <BubbleMap data={Object.entries(data)} metadata={metaData} />}

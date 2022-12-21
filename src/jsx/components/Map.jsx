@@ -22,15 +22,21 @@ import chroma from 'chroma-js';
 // Load helpers.
 import { getMapData } from '../helpers/GetMapData.js';
 
-function Map({ data }) {
+function Map({ data, metadata }) {
   const appRef = useRef();
   const mapRef = useRef();
 
   const [currentArea, setCurrentArea] = useState('');
+  const [currentAreaID, setCurrentAreaID] = useState('');
   const [mapData, setMapdata] = useState(false);
 
   const values = useMemo(() => data.reduce((acc, cur) => Object.assign(acc, { [cur[0]]: cur[1] }), {}), [data]);
+  const metadata_values = useMemo(() => metadata.reduce((acc, cur) => Object.assign(acc, { [cur.id]: cur }), {}), [metadata]);
   const f = useMemo(() => chroma.scale(['#fff', '#00764c']).domain([0, Math.max(...data.map(el => el[1]))]), [data]);
+  console.log(data);
+  console.log(values);
+  console.log(metadata);
+  console.log(metadata_values);
 
   // Hide area info
   const hideData = () => {
@@ -46,6 +52,12 @@ function Map({ data }) {
     // Show area info
     const showData = (event, d) => {
       setCurrentArea(d.properties.Name);
+      metadata.map(el => {
+        if (el.name_fi === d.properties.Name) {
+          setCurrentAreaID(el.id);
+        }
+        return false;
+      });
       appRef.current.querySelector('.map_info').style.visibility = 'visible';
       appRef.current.querySelector('.map_info').style.opacity = 1;
     };
@@ -94,7 +106,7 @@ function Map({ data }) {
         showData(event, d);
       });
     updateMap();
-  }, [updateMap, values]);
+  }, [metadata, updateMap, values]);
 
   useEffect(() => {
     getMapData().then(mapdata => {
@@ -130,6 +142,22 @@ function Map({ data }) {
               </div>
             )
           }
+          {
+            currentAreaID && metadata_values[currentAreaID] && (
+              <div className="neighbours_container">
+                <h5>Miten naapureilla menee</h5>
+                {
+                metadata_values[currentAreaID].neighbours.map(neighbour => (
+                  <div className="neighbour_container" key={neighbour}>
+                    <span className="label">{metadata_values[neighbour].name_fi}</span>
+                    {': '}
+                    <span className="value">{(values[metadata_values[neighbour].name_fi]) ? `${values[metadata_values[neighbour].name_fi]} pussia` : 'ei vielä 😔'}</span>
+                  </div>
+                ))
+              }
+              </div>
+            )
+          }
           <div className="close_container"><button className="close" type="button" onClick={() => hideData()}>Sulje</button></div>
         </div>
       </div>
@@ -139,6 +167,7 @@ function Map({ data }) {
 }
 
 Map.propTypes = {
+  metadata: PropTypes.instanceOf(Array).isRequired,
   data: PropTypes.instanceOf(Array).isRequired
 };
 

@@ -14,9 +14,11 @@ function BubbleMap({ data, metadata }) {
   const appRef = useRef(null);
   const mapRef = useRef(null);
 
-  const [currentArea, setCurrentArea] = useState('');
+  const [currentAreaName, setCurrentAreaName] = useState('');
+  const [currentAreaID, setCurrentAreaID] = useState('');
 
   const values = useMemo(() => data.reduce((acc, cur) => Object.assign(acc, { [cur[0]]: cur[1] }), {}), [data]);
+  const metadata_values = useMemo(() => metadata.reduce((acc, cur) => Object.assign(acc, { [cur.id]: cur }), {}), [metadata]);
 
   // Hide area info
   const hideData = () => {
@@ -26,7 +28,8 @@ function BubbleMap({ data, metadata }) {
   const drawMap = useCallback(() => {
     // Show area info
     const showData = (event, d) => {
-      setCurrentArea(d.name);
+      setCurrentAreaName(d.name);
+      setCurrentAreaID(d.id);
       appRef.current.querySelector('.map_info').style.visibility = 'visible';
       appRef.current.querySelector('.map_info').style.opacity = 1;
     };
@@ -70,6 +73,7 @@ function BubbleMap({ data, metadata }) {
         // x: Math.cos((i / m) * 2 * Math.PI) * 200 + width / 2 + Math.random(),
         // y: Math.sin((i / m) * 2 * Math.PI) * 200 + height / 2 + Math.random(),
         cluster: el.group,
+        id: el.id,
         name,
         population: el.population,
         radius: r,
@@ -156,18 +160,34 @@ function BubbleMap({ data, metadata }) {
       </IsVisible>
       <div className="map_info">
         <div className="map_info_content">
-          <h3>{currentArea}</h3>
+          <h3>{currentAreaName}</h3>
           {
-            (currentArea && values[currentArea]) && (
+            (currentAreaName && values[currentAreaName]) && (
               <div className="current_municipality_status">
                 <h4>
                   <div>Kerättyjä pusseja</div>
                   <div>
-                    {values[currentArea]}
+                    {values[currentAreaName]}
                     {' '}
                     kappaletta
                   </div>
                 </h4>
+              </div>
+            )
+          }
+          {
+            currentAreaID && metadata_values[currentAreaID] && (
+              <div className="neighbours_container">
+                <h5>Miten naapureilla menee</h5>
+                {
+                metadata_values[currentAreaID].neighbours.map(neighbour => (
+                  <div className="neighbour_container" key={neighbour}>
+                    <span className="label">{metadata_values[neighbour].name_fi}</span>
+                    {': '}
+                    <span className="value">{(values[metadata_values[neighbour].name_fi]) ? `${values[metadata_values[neighbour].name_fi]} pussia` : 'ei vielä 😔'}</span>
+                  </div>
+                ))
+              }
               </div>
             )
           }

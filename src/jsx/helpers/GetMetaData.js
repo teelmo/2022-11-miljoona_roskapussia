@@ -5,6 +5,7 @@ const cleanData = (data) => data.map(el => ({
   id: el.id,
   name_fi: el.name_fi,
   name_se: el.name_se,
+  neighbours: el.neighbours.split(';'),
   population: parseInt(el.population, 10),
   x: parseFloat(el.x),
   y: parseFloat(el.y)
