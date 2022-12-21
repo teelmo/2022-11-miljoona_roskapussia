@@ -27,10 +27,10 @@
   }
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container {
-  border-bottom: 1px solid #00764c;
-  margin: auto auto 60px auto;
+  border-bottom: 1px solid rgba(0, 118, 76, 0.2);
+  margin: auto auto 30px auto;
   max-width: 600px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .logo_container {
   text-align: center;
@@ -46,12 +46,14 @@
   font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 34px;
   font-weight: 600;
-  line-height: 36px;
   letter-spacing: 0.05em;
+  line-height: 36px;
   margin: 0 0 10px 0;
   text-align: center;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container h2.logo {
+  font-size: 42px;
+  line-height: 44px;
   text-transform: uppercase;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container h3 {
