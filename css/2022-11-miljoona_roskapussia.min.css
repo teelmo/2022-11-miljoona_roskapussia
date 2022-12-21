@@ -16,9 +16,15 @@
   background-repeat-y: no-repeat;
   background-repeat: repeat-x;
   background-size: 100% auto;
+  box-sizing: border-box;
   font-family: Open Sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 40px;
-  padding: 0 0 40px 0;
+  padding: 0 10px 40px 10px;
+}
+@media all and (max-width: 1000px) {
+  #app-root-2022-11-miljoona_roskapussia .app {
+    background-size: 1000px auto;
+  }
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container {
   border-bottom: 1px solid #00764c;
@@ -114,7 +120,8 @@
   text-align: center;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label {
-  margin: 0 10px;
+  margin: 0 10px 5px 10px;
+  display: inline-block;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label .label {
   margin-right: 5px;
@@ -131,7 +138,7 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label input::placeholder {
   color: #00764c;
   opacity: 0.5;
-  text-align: left;
+  text-align: center;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label input:focus::placeholder {
   opacity: 1;
