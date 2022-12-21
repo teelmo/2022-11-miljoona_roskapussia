@@ -234,6 +234,15 @@
   font-size: 20px;
   line-height: 24px;
 }
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container {
+  margin-bottom: 20px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container h5 {
+  font-size: 16px;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container .neighbour_container .label {
+  font-weight: 600;
+}
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container .close {
   background-color: #00764c;
   border: 2px solid #00764c;
