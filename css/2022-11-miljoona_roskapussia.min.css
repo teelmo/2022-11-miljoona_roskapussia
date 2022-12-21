@@ -30,7 +30,7 @@
   border-bottom: 1px solid #00764c;
   margin: auto auto 60px auto;
   max-width: 600px;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .logo_container {
   text-align: center;
@@ -209,6 +209,18 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container svg .path:hover {
   fill: #00764c;
 }
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .legend_container {
+  height: 20px;
+  text-align: right;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .legend_container h5 {
+  margin: 0 0 2px 0;
+}
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .legend_container .legend {
+  display: inline-block;
+  height: 20px;
+  width: 2px;
+}
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info {
   height: 100%;
   opacity: 0;
@@ -229,6 +241,9 @@
   height: 100%;
   justify-content: center;
 }
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .current_municipality_status {
+  margin-bottom: 20px;
+}
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .current_municipality_status h4 {
   color: #00764c;
   font-size: 20px;
@@ -236,9 +251,11 @@
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container {
   margin-bottom: 20px;
+  text-align: center;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container h5 {
-  font-size: 16px;
+  font-size: 18px;
+  margin: 0 0 10px 0;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container .neighbour_container .label {
   font-weight: 600;
