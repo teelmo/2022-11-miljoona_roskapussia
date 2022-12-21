@@ -159,6 +159,7 @@
   font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
+  letter-spacing: 0.04em;
   line-height: 26px;
   outline: none;
   padding: 8px 20px;
@@ -174,12 +175,14 @@
   color: #721c24;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .result_container video {
-  width: 140px;
+  height: auto;
+  width: 150px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper {
   position: relative;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_container {
+  min-height: 650px;
   opacity: 0;
   text-align: center;
   transition-delay: 0s;
@@ -214,6 +217,9 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .legend_container {
   height: 20px;
   text-align: right;
+  transition-delay: 2s;
+  transition-duration: 2s;
+  transition-property: opacity;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .legend_container h5 {
   margin: 0 0 2px 0;
@@ -224,7 +230,6 @@
   width: 2px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info {
-  height: 100%;
   opacity: 0;
   position: absolute;
   top: 0;
@@ -234,14 +239,21 @@
   visibility: hidden;
   width: 100%;
   z-index: 1;
+  justify-content: center;
+  display: flex;
+  height: 100%;
+  align-items: center;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content {
   align-items: center;
-  background-color: rgba(251, 219, 233, 0.9);
-  display: flex;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  display: inline-flex;
   flex-direction: column;
-  height: 100%;
   justify-content: center;
+  padding: 40px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .current_municipality_status {
   margin-bottom: 20px;
@@ -262,17 +274,18 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .neighbours_container .neighbour_container .label {
   font-weight: 600;
 }
-#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container .close {
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container button.close {
   background-color: #00764c;
   border: 2px solid #00764c;
   color: #fff;
   cursor: pointer;
   font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
+  letter-spacing: 0.04em;
   padding: 4px 13px;
   text-transform: uppercase;
 }
-#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container .close:hover {
+#app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content .close_container button.close:hover {
   background-color: #fbdae8;
   color: #00764c;
 }

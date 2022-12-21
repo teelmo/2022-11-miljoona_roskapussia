@@ -164,10 +164,10 @@ function App() {
         </div>
       </div>
       <div className="content_container">
-        {data && <Map data={Object.entries(data)} metadata={metaData} />}
+        {data && <Map data={Object.entries(data)} metadata={metaData} municipalities={municipalities} />}
       </div>
       <div className="content_container">
-        {(data && metaData) && <BubbleMap data={Object.entries(data)} metadata={metaData} />}
+        {(data && metaData) && <BubbleMap data={Object.entries(data)} metadata={metaData} municipalities={municipalities} />}
       </div>
       <noscript>Your browser does not support JavaScript!</noscript>
     </div>

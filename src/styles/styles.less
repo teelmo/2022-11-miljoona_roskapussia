@@ -7,6 +7,7 @@
 
 @green: #00764c;
 @pink: #fbdae8;
+// @pink: #f9e0ea;
 
 @import 'yddrasil_overrides.less';
 
@@ -159,6 +160,7 @@
         font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 24px;
         font-weight: 600;
+        letter-spacing: 0.04em;
         line-height: 26px;
         outline: none;
         padding: 8px 20px;
@@ -174,12 +176,14 @@
         color: #721c24;
       }
       video {
-        width: 140px;
+        height: auto;
+        width: 150px;
       }
     }
     .map_wrapper {
       position: relative;
       .map_container {
+        min-height: 650px;
         opacity: 0;
         text-align: center;
         transition-delay: 0s;
@@ -214,6 +218,9 @@
       .legend_container {
         height: 20px;
         text-align: right;
+        transition-delay: 2s;
+        transition-duration: 2s;
+        transition-property: opacity;
         h5 {
           margin: 0 0 2px 0;
         }
@@ -224,7 +231,6 @@
         }
       }
       .map_info {
-        height: 100%;
         opacity: 0;
         position: absolute;
         top: 0;
@@ -234,13 +240,20 @@
         visibility: hidden;
         width: 100%;
         z-index: 1;
+        justify-content: center;
+        display: flex;
+        height: 100%;
+        align-items: center;
         .map_info_content {
           align-items: center;
-          background-color: rgba(251, 219, 233, 0.9);
-          display: flex;
+          background-color: rgba(255, 255, 255, 0.95);
+          border-radius: 20px;
+          box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+          box-sizing: border-box;
+          display: inline-flex;
           flex-direction: column;
-          height: 100%;
           justify-content: center;
+          padding: 40px;
           .current_municipality_status {
             margin-bottom: 20px;
             h4 {
@@ -263,13 +276,14 @@
             }
           }
           .close_container {
-            .close {
+            button.close {
               background-color: @green;
               border: 2px solid @green;
               color: #fff;
               cursor: pointer;
               font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
               font-size: 12px;
+              letter-spacing: 0.04em;
               padding: 4px 13px;
               text-transform: uppercase;
               &:hover {

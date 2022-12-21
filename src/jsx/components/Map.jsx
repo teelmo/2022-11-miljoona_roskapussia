@@ -26,7 +26,7 @@ function Map({ data, metadata }) {
   const appRef = useRef();
   const mapRef = useRef();
 
-  const [currentArea, setCurrentArea] = useState('');
+  const [currentAreaName, setCurrentAreaName] = useState('');
   const [currentAreaID, setCurrentAreaID] = useState('');
   const [mapData, setMapdata] = useState(false);
 
@@ -46,16 +46,26 @@ function Map({ data, metadata }) {
   const hideData = () => {
     appRef.current.querySelector('.map_info').style.visibility = 'hidden';
     appRef.current.querySelector('.map_info').style.opacity = 0;
+    document.querySelector('#app_search_municipality').value = '';
   };
 
   const updateMap = useCallback(() => {
     d3.select(appRef.current).select('.map_container').selectAll('path').attr('fill', (d) => (f(values[d.properties.Name] ? values[d.properties.Name] : 0)));
   }, [f, values]);
 
-  const drawMap = useCallback((map_data) => {
-    // Show area info
-    const showData = (event, d) => {
-      setCurrentArea(d.properties.Name);
+  const showData = useCallback((event, d) => {
+    if (d === false) {
+      metadata.map(el => {
+        if (el.name_fi === event.target.value) {
+          setCurrentAreaName(event.target.value);
+          setCurrentAreaID(el.id);
+          appRef.current.querySelector('.map_info').style.visibility = 'visible';
+          appRef.current.querySelector('.map_info').style.opacity = 1;
+        }
+        return false;
+      });
+    } else {
+      setCurrentAreaName(d.properties.Name);
       metadata.map(el => {
         if (el.name_fi === d.properties.Name) {
           setCurrentAreaID(el.id);
@@ -64,7 +74,11 @@ function Map({ data, metadata }) {
       });
       appRef.current.querySelector('.map_info').style.visibility = 'visible';
       appRef.current.querySelector('.map_info').style.opacity = 1;
-    };
+    }
+  }, [metadata]);
+
+  const drawMap = useCallback((map_data) => {
+    // Show area info
     const showTooltip = (event, d) => {
       d3.select(appRef.current).select('.map_tooltip')
         .style('left', `${event.offsetX + 10}px`)
@@ -110,7 +124,7 @@ function Map({ data, metadata }) {
         showData(event, d);
       });
     updateMap();
-  }, [metadata, updateMap, values]);
+  }, [showData, updateMap, values]);
 
   useEffect(() => {
     getMapData().then(mapdata => {
@@ -123,66 +137,75 @@ function Map({ data, metadata }) {
   }, [drawMap, mapData]);
 
   return (
-    <div className="map_wrapper map_municipality" ref={appRef}>
+    <>
       <h2>Miltä tilanne näyttää kunnittain</h2>
-      <h4>Valitse kunta täppäämällä tai klikkaamalla kuntaa</h4>
-      <IsVisible once>
-        {(isVisible) => (
-          <>
-            <div className="map_container map" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
-            <div className="legend_container">
-              <h5>Enemmän kerättyjä pusseja →</h5>
-              {
-              scales.map((scale) => <div key={scale} className="legend" style={{ backgroundColor: f(scale) }} />)
-            }
-            </div>
-          </>
-        )}
-      </IsVisible>
-      <div className="map_info">
-        <div className="map_info_content">
-          <h3>{currentArea}</h3>
-          {
-            (currentArea && values[currentArea]) && (
-              <div className="current_municipality_status">
-                <h4>
-                  <div>Kerättyjä pusseja</div>
-                  <div>
-                    {values[currentArea]}
-                    {' '}
-                    kappaletta
-                  </div>
-                </h4>
-              </div>
-            )
-          }
-          {
-            currentAreaID && metadata_values[currentAreaID] && (
-              <div className="neighbours_container">
-                <h5>Miten naapureilla menee</h5>
-                {
-                metadata_values[currentAreaID].neighbours.map(neighbour => (
-                  <div className="neighbour_container" key={neighbour}>
-                    <span className="label">{metadata_values[neighbour].name_fi}</span>
-                    {': '}
-                    <span className="value">{(values[metadata_values[neighbour].name_fi]) ? `${values[metadata_values[neighbour].name_fi]} pussia` : 'ei vielä 😔'}</span>
-                  </div>
-                ))
-              }
-              </div>
-            )
-          }
-          <div className="close_container"><button className="close" type="button" onClick={() => hideData()}>Sulje</button></div>
+      <h4>Valitse kunta täppäämällä tai valitse alta</h4>
+      <div className="map_wrapper map_municipality" ref={appRef}>
+        <div className="input_container">
+          <label htmlFor="app_search_municipality">
+            <input list="app_municipalities" id="app_search_municipality" name="" placeholder="Hae kuntaa" onChange={(event) => showData(event, false)} />
+          </label>
         </div>
+        <IsVisible once>
+          {(isVisible) => (
+            <>
+              <div className="map_container map" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
+              <div className="legend_container">
+                <h5>Enemmän kerättyjä pusseja →</h5>
+                {
+              scales.map((scale) => <div key={scale} className="legend" style={isVisible ? { backgroundColor: f(scale), opacity: 1 } : { opacity: 0 }} />)
+            }
+              </div>
+            </>
+          )}
+        </IsVisible>
+        <div className="map_info">
+          <div className="map_info_content">
+            <h3>{currentAreaName}</h3>
+            <div className="current_municipality_status">
+              {
+                (currentAreaName && values[currentAreaName]) ? (
+                  <h4>
+                    <div>Kerättyjä pusseja</div>
+                    <div>
+                      {values[currentAreaName]}
+                      {' '}
+                      kappaletta
+                    </div>
+                  </h4>
+                ) : (
+                  <h4>Ei vielä erättyjä pusseja 😔</h4>
+                )
+              }
+            </div>
+            {
+              currentAreaID && metadata_values[currentAreaID] && (
+                <div className="neighbours_container">
+                  <h5>Miten naapureilla menee</h5>
+                  {
+                    metadata_values[currentAreaID].neighbours.map(neighbour => (
+                      <div className="neighbour_container" key={neighbour}>
+                        <span className="label">{metadata_values[neighbour].name_fi}</span>
+                        {': '}
+                        <span className="value">{(values[metadata_values[neighbour].name_fi]) ? `${values[metadata_values[neighbour].name_fi]} pussia` : '😔'}</span>
+                      </div>
+                    ))
+                  }
+                </div>
+              )
+            }
+            <div className="close_container"><button className="close" type="button" onClick={() => hideData()}>Sulje</button></div>
+          </div>
+        </div>
+        <div className="map_tooltip" />
       </div>
-      <div className="map_tooltip" />
-    </div>
+    </>
   );
 }
 
 Map.propTypes = {
+  data: PropTypes.instanceOf(Array).isRequired,
   metadata: PropTypes.instanceOf(Array).isRequired,
-  data: PropTypes.instanceOf(Array).isRequired
 };
 
 Map.defaultProps = {

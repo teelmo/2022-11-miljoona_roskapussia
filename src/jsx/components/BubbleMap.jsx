@@ -24,15 +24,35 @@ function BubbleMap({ data, metadata }) {
   const hideData = () => {
     appRef.current.querySelector('.map_info').style.visibility = 'hidden';
     appRef.current.querySelector('.map_info').style.opacity = 0;
+    document.querySelector('#app_search_municipality1').value = '';
   };
-  const drawMap = useCallback(() => {
-    // Show area info
-    const showData = (event, d) => {
+
+  const showData = useCallback((event, d) => {
+    if (d === false) {
+      metadata.map(el => {
+        if (el.name_fi === event.target.value) {
+          setCurrentAreaName(event.target.value);
+          setCurrentAreaID(el.id);
+          appRef.current.querySelector('.map_info').style.visibility = 'visible';
+          appRef.current.querySelector('.map_info').style.opacity = 1;
+        }
+        return false;
+      });
+    } else {
       setCurrentAreaName(d.name);
-      setCurrentAreaID(d.id);
+      metadata.map(el => {
+        if (el.name_fi === d.name) {
+          setCurrentAreaID(el.id);
+        }
+        return false;
+      });
       appRef.current.querySelector('.map_info').style.visibility = 'visible';
       appRef.current.querySelector('.map_info').style.opacity = 1;
-    };
+    }
+  }, [metadata]);
+
+  const drawMap = useCallback(() => {
+    // Show area info
 
     const max_value = Math.max(...data.map(el => el[1]));
 
@@ -144,24 +164,30 @@ function BubbleMap({ data, metadata }) {
       .force('x', d3.forceX().x((d) => (width / 3) * ((d.x1 - min_x) / (max_x - min_x))).strength(0.5))
       .force('y', d3.forceY().y((d) => (height / 1.5) * ((min_y - d.y1) / (max_y - min_y)) + 170).strength(0.5))
       .on('tick', tick);
-  }, [data, metadata, values]);
+  }, [data, metadata, showData, values]);
 
   useEffect(() => {
     if (d3.select(appRef.current).select('.map_container svg').empty() === true) drawMap();
   }, [drawMap]);
 
   return (
-    <div className="map_wrapper map_bubble" ref={appRef}>
+    <>
       <p>Tää on tässä vaan Teemon omaksi huviksi, ei osaksi toteutusta</p>
-      <IsVisible once>
-        {(isVisible) => (
-          <div className="map_container" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
-        )}
-      </IsVisible>
-      <div className="map_info">
-        <div className="map_info_content">
-          <h3>{currentAreaName}</h3>
-          {
+      <div className="map_wrapper map_bubble" ref={appRef}>
+        <div className="input_container">
+          <label htmlFor="app_search_municipality1">
+            <input list="app_municipalities" id="app_search_municipality1" name="" placeholder="Hae kuntaa" onChange={(event) => showData(event, false)} />
+          </label>
+        </div>
+        <IsVisible once>
+          {(isVisible) => (
+            <div className="map_container" ref={mapRef} style={isVisible ? { opacity: 1 } : {}} />
+          )}
+        </IsVisible>
+        <div className="map_info">
+          <div className="map_info_content">
+            <h3>{currentAreaName}</h3>
+            {
             (currentAreaName && values[currentAreaName]) && (
               <div className="current_municipality_status">
                 <h4>
@@ -175,7 +201,7 @@ function BubbleMap({ data, metadata }) {
               </div>
             )
           }
-          {
+            {
             currentAreaID && metadata_values[currentAreaID] && (
               <div className="neighbours_container">
                 <h5>Miten naapureilla menee</h5>
@@ -191,17 +217,18 @@ function BubbleMap({ data, metadata }) {
               </div>
             )
           }
-          <div className="close_container"><button className="close" type="button" onClick={() => hideData()}>Sulje</button></div>
+            <div className="close_container"><button className="close" type="button" onClick={() => hideData()}>Sulje</button></div>
+          </div>
         </div>
+        <div className="map_tooltip" />
       </div>
-      <div className="map_tooltip" />
-    </div>
+    </>
   );
 }
 
 BubbleMap.propTypes = {
-  metadata: PropTypes.instanceOf(Array).isRequired,
-  data: PropTypes.instanceOf(Array).isRequired
+  data: PropTypes.instanceOf(Array).isRequired,
+  metadata: PropTypes.instanceOf(Array).isRequired
 };
 
 BubbleMap.defaultProps = {
