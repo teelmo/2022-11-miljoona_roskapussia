@@ -18,9 +18,13 @@
   background-repeat-y: no-repeat;
   background-repeat: repeat-x;
   background-size: 100% auto; 
+  box-sizing: border-box;
   font-family: Open Sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 40px;
-  padding: 0 0 40px 0;
+  padding: 0 10px 40px 10px;
+  @media all and (max-width: 1000px) {
+    background-size: 1000px auto; 
+  }
   .content_container {
     border-bottom: 1px solid @green;
     margin: auto auto 60px auto;
@@ -116,7 +120,8 @@
       margin: 20px 0 20px 0;
       text-align: center;
       label {
-        margin: 0 10px;
+        margin: 0 10px 5px 10px;
+        display: inline-block;
         .label {
           margin-right: 5px;
         }
@@ -131,7 +136,7 @@
           &::placeholder {
             color: @green;
             opacity: 0.5;
-            text-align: left;
+            text-align: center;
           }
           &:focus::placeholder {
             opacity: 1;

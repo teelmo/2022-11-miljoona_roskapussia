@@ -164,6 +164,7 @@ function App() {
         </div>
       </div>
       <div className="content_container">
+        <p>Kartta päivittyy viiveellä</p>
         {data && <Map data={Object.entries(data)} />}
       </div>
       <div className="content_container">

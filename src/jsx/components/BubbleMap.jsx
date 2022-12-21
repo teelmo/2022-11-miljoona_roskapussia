@@ -53,7 +53,7 @@ function BubbleMap({ data, metadata }) {
     const svg = d3.select(appRef.current).select('.map_container').append('svg').attr('height', height + margin.top + margin.bottom)
       .attr('width', width + margin.left + margin.right)
       .append('g')
-      .attr('transform', `translate(${width / 2 - 30} ,${height / 2})`);
+      .attr('transform', `translate(${width / 2 - 20} ,${height / 2})`);
 
     const color = d3.scaleOrdinal(d3.schemeCategory10)
       .domain(d3.range(m));
