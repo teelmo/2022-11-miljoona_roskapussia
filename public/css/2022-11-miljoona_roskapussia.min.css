@@ -27,10 +27,10 @@
   }
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container {
-  border-bottom: 1px solid rgba(0, 118, 76, 0.2);
-  margin: auto auto 30px auto;
+  border-bottom: 3px solid rgba(0, 118, 76, 0.2);
+  margin: auto auto 60px auto;
   max-width: 600px;
-  padding-bottom: 30px;
+  padding-bottom: 60px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .logo_container {
   text-align: center;
@@ -46,7 +46,7 @@
   font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 34px;
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
   line-height: 36px;
   margin: 0 0 10px 0;
   text-align: center;
@@ -79,10 +79,12 @@
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container {
   border-radius: 25px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  color: #00764c;
   height: 50px;
+  margin: auto auto;
   overflow: hidden;
   position: relative;
+  width: 80%;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container .bar_total {
   background-color: #fff;
@@ -105,7 +107,7 @@
   transition-property: width;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container h4 .total_container .bar_container .bar_target {
-  color: #222;
+  color: #00764c;
   font-size: 20px;
   line-height: 50px;
   padding-right: 15px;
@@ -130,9 +132,10 @@
   margin-right: 5px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label input {
-  border-radius: 10px;
+  border-radius: 25px;
   border: none;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  color: #00764c;
   font-size: 18px;
   outline: none;
   padding: 8px 10px;
@@ -147,6 +150,9 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label input:focus::placeholder {
   opacity: 1;
 }
+#app-root-2022-11-miljoona_roskapussia .app .content_container .input_container label input::-webkit-calendar-picker-indicator {
+  color: #00764c;
+}
 #app-root-2022-11-miljoona_roskapussia .app .content_container .button_container {
   margin-bottom: 20px;
   text-align: center;
@@ -154,7 +160,7 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .button_container button {
   appearance: none;
   background-color: #00764c;
-  border-radius: 20px;
+  border-radius: 25px;
   border: 2px solid #00764c;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   color: #fff;
@@ -162,7 +168,7 @@
   font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 24px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   line-height: 26px;
   outline: none;
   padding: 8px 20px;
@@ -218,6 +224,7 @@
   fill: #00764c;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .legend_container {
+  color: #00764c;
   height: 20px;
   text-align: right;
   transition-delay: 2s;
@@ -234,6 +241,11 @@
   width: 2px;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info {
+  align-items: center;
+  color: #00764c;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   opacity: 0;
   position: absolute;
   top: 0;
@@ -243,10 +255,6 @@
   visibility: hidden;
   width: 100%;
   z-index: 1;
-  justify-content: center;
-  display: flex;
-  height: 100%;
-  align-items: center;
 }
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_info .map_info_content {
   align-items: center;
@@ -285,7 +293,7 @@
   cursor: pointer;
   font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
   padding: 4px 13px;
   text-transform: uppercase;
 }
@@ -296,6 +304,7 @@
 #app-root-2022-11-miljoona_roskapussia .app .content_container .map_wrapper .map_tooltip {
   background-color: #ffffff;
   border: 1px solid #ccc;
+  color: #00764c;
   font-size: 14px;
   opacity: 0;
   padding: 4px 7px;

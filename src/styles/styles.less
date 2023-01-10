@@ -27,10 +27,10 @@
     background-size: 1000px auto; 
   }
   .content_container {
-    border-bottom: 1px solid rgba(0, 118, 76, 0.2);
-    margin: auto auto 30px auto;
+    border-bottom: 3px solid rgba(0, 118, 76, 0.2);
+    margin: auto auto 60px auto;
     max-width: 600px;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
     .logo_container {
       text-align: center;
       img.logo {
@@ -45,7 +45,7 @@
       font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 34px;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0;
       line-height: 36px;
       margin: 0 0 10px 0;
       text-align: center;
@@ -78,10 +78,13 @@
         }
         .bar_container {
           border-radius: 25px;
-          box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+          // box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+          color: @green;
           height: 50px;
+          margin: auto auto;
           overflow: hidden;
           position: relative;
+          width: 80%;
           .bar_total {
             background-color: #fff;
             height: 100%;
@@ -104,7 +107,7 @@
             transition-property: width;
           }
           .bar_target {
-            color: #222;
+            color: @green;
             font-size: 20px;
             line-height: 50px;
             padding-right: 15px;
@@ -130,9 +133,10 @@
           margin-right: 5px;
         }
         input {
-          border-radius: 10px;
+          border-radius: 25px;
           border: none;
           box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+          color: @green;
           font-size: 18px;
           outline: none;
           padding: 8px 10px;
@@ -146,6 +150,9 @@
           &:focus::placeholder {
             opacity: 1;
           }
+          &::-webkit-calendar-picker-indicator {
+            color: @green;
+          }
         }
       }
     }
@@ -155,7 +162,7 @@
       button {
         appearance: none;
         background-color: @green;
-        border-radius: 20px;
+        border-radius: 25px;
         border: 2px solid @green;
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         color: #fff;
@@ -163,7 +170,7 @@
         font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 24px;
         font-weight: 600;
-        letter-spacing: 0.04em;
+        letter-spacing: 0;
         line-height: 26px;
         outline: none;
         padding: 8px 20px;
@@ -219,6 +226,7 @@
         }
       }
       .legend_container {
+        color: @green;
         height: 20px;
         text-align: right;
         transition-delay: 2s;
@@ -235,6 +243,11 @@
         }
       }
       .map_info {
+        align-items: center;
+        color: @green;
+        display: flex;
+        height: 100%;
+        justify-content: center;
         opacity: 0;
         position: absolute;
         top: 0;
@@ -244,10 +257,6 @@
         visibility: hidden;
         width: 100%;
         z-index: 1;
-        justify-content: center;
-        display: flex;
-        height: 100%;
-        align-items: center;
         .map_info_content {
           align-items: center;
           background-color: rgba(255, 255, 255, 0.95);
@@ -287,7 +296,7 @@
               cursor: pointer;
               font-family: moret, "Helvetica Neue", Helvetica, Arial, sans-serif;
               font-size: 12px;
-              letter-spacing: 0.04em;
+              letter-spacing: 0;
               padding: 4px 13px;
               text-transform: uppercase;
               &:hover {
@@ -301,6 +310,7 @@
       .map_tooltip {
         background-color: rgba(255, 255, 255, 1);
         border: 1px solid #ccc;
+        color: @green;
         font-size: 14px;
         opacity: 0;
         padding: 4px 7px;

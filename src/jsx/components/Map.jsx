@@ -101,7 +101,7 @@ function Map({ data, metadata }) {
 
     const map = topojson.feature(map_data, map_data.objects.features);
     // https://observablehq.com/@d3/robinson
-    const projection = geoLarrivee().fitExtent([[0, 0], [appRef.current.offsetWidth, 650]], map);
+    const projection = geoLarrivee().fitExtent([[50, 0], [appRef.current.offsetWidth - 50, 700]], map);
     const path = d3.geoPath().projection(projection);
 
     svg.append('g')
@@ -121,6 +121,7 @@ function Map({ data, metadata }) {
         hideTooltip();
       })
       .on('click', (event, d) => {
+        hideTooltip();
         showData(event, d);
       });
     updateMap();
